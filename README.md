@@ -6,7 +6,6 @@ Graphical user interface:
 - [ ] menubar
 - [x] datepicker to switch between dates
 - [x] systemtray entry
-
 - [x] table of todays recordings
 - [x] input for projects with autocomplete
 - [x] input for a description
