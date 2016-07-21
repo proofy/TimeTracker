@@ -3,7 +3,7 @@ is a software which protocols the working hours for an project. It should be an 
 
 ## TODOs
 Graphical user interface:
-- [] menubar
+- [ ] menubar
 - [x] datepicker to switch between dates
 - [x] systemtray entry
 
@@ -17,8 +17,8 @@ Functions:
 - [x] stop recording
 - [x] save day in file
 - [x] create directory hierarchie yyyy/mm/dd
-- [] option menu
+- [ ] option menu
 - [x] hide in systemtray
-- [] autostart on systemstart
-- [] backup(create zip)
-- [] import backup
+- [ ] autostart on systemstart
+- [ ] backup(create zip)
+- [ ] import backup
