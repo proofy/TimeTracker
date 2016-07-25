@@ -34,13 +34,14 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
  *
  * @author mfi
  */
-public class EditFiles {
+public final class EditFiles {
     
     
     public static void createFile(String path) {
@@ -86,22 +87,15 @@ public class EditFiles {
     }
     
     public static void saveIssues(String path, ObservableList<Task> data) {
-        Writer writer = null;
-        
-        try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "utf-8"));
-            for(int i=0; i < data.size(); i++) {
-                writer.append(data.get(i).toFileString() + "\n");
-            }
-            
-        } catch(IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {if(writer != null) writer.close();} catch (Exception e) {}
+        ObservableList<String> list = FXCollections.observableArrayList();
+        for(int i = 0; i < data.size(); i++) {
+            list.add(data.get(i).toFileString());
         }
+        
+        saveFile(path, list);
     }
     
-    public static void saveProjects(String path, ObservableList<String> data) {
+    public static void saveFile(String path, ObservableList<String> data) {
         Writer writer = null;
         
         try {

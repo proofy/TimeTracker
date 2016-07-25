@@ -51,16 +51,17 @@ import org.controlsfx.control.textfield.TextFields;
  */
 public class ApplicationController implements Initializable {
     
+    private final String pathProjects = "./files/projectlist.txt";
+    
     private boolean started;
     private Task task;
+    private Settings settings;
     
     private ObservableList<Task> data;
     private ObservableList<String> autoProjects;
     
     private Calendar today;
     private Calendar selectedDay;
-    
-    private String pathProjects;
     
     @FXML private DatePicker dpDate;
     
@@ -77,6 +78,8 @@ public class ApplicationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.started = false;
+        
+        this.settings = new Settings();
         
         this.dpDate.setValue(LocalDate.now());
         this.today = this.selectedDay = Calendar.getInstance();
@@ -146,7 +149,10 @@ public class ApplicationController implements Initializable {
             this.loadTasks(this.selectedDay);
         }
     }
-    
+    /**
+     * Buttonhandler for the delete task button. It deletes the selected task.
+     * @param event
+     */
     @FXML
     public void handleButtonDelete(ActionEvent event) {
         Task i = (Task)this.tvTasks.getSelectionModel().getSelectedItem();
@@ -174,6 +180,10 @@ public class ApplicationController implements Initializable {
         }
     }
     
+    /**
+     * Initialization of the table. It binds the keys of a task to the right column. 
+     * Also it defines a selection-handler for the table.
+     */
     private void initTaskTable() {
         this.tcFrom.setCellValueFactory(new PropertyValueFactory<>("start"));
         this.tcTo.setCellValueFactory(new PropertyValueFactory<>("end"));
@@ -192,14 +202,18 @@ public class ApplicationController implements Initializable {
         });  
     }
     
+    /**
+     * Create directory structure.
+     */
     private void initFilesystem() {
-        
-        this.pathProjects = "./files/projectlist.txt";
-        
         EditFiles.createFile(EditFiles.getDirectory(this.today), true);
         EditFiles.createFile(this.pathProjects);
     } 
     
+    /**
+     * Loads tasks of the passed date. The tasks were directly saved into the table data.
+     * @param date Date of tasks
+     */
     private void loadTasks(Calendar date) {
         this.data.clear();
         
@@ -212,23 +226,30 @@ public class ApplicationController implements Initializable {
         }
     }
     
+    /**
+     * Add a project to the project list. Only if its not already in the list.
+     * @param task Task which contains the project description
+     */
+    private void addProject(Task task) {
+        String pro = task.getProject();
+        
+        if(!this.autoProjects.contains(pro)) {
+            this.autoProjects.add(pro);
+            EditFiles.saveFile(this.pathProjects, this.autoProjects);
+        }
+        
+        TextFields.bindAutoCompletion(this.tfProject, this.autoProjects);
+    }
+    
+    /**
+     * Load projects out of the projectlist file.
+     */
     private void loadProjects() {
         this.autoProjects.clear();
         List<String> lines = EditFiles.readFile(this.pathProjects);
 
         for(int i=0;i<lines.size();i++) {
             this.autoProjects.add(lines.get(i));
-        }
-        
-        TextFields.bindAutoCompletion(this.tfProject, this.autoProjects);
-    }
-    
-    private void addProject(Task iss) {
-        String pro = iss.getProject();
-        
-        if(!this.autoProjects.contains(pro)) {
-            this.autoProjects.add(pro);
-            EditFiles.saveProjects(this.pathProjects, this.autoProjects);
         }
         
         TextFields.bindAutoCompletion(this.tfProject, this.autoProjects);
