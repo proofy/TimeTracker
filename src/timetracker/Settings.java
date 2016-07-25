@@ -23,34 +23,28 @@
  */
 package timetracker;
 
-import java.io.File;
-import java.io.IOException;
-
 /**
- *
- * @author mfi
+ * Manage settings.
+ * @author Matthias Fischer
  */
 public class Settings {
     
     private final String path = "./settings.ini";
     
-    private File file;
-    
     Settings() {
-       try {
-            this.file = new File(this.path);
-            if(!this.file.exists()) {
-                this.file.createNewFile();
-            }
-        } catch(IOException e) {
-            e.printStackTrace();
-        } 
+        EditFiles.createFile(this.path);
     }
     
+    /**
+     * Load settings out of the settings.ini file
+     */
     public void loadSettings() {
         
     }
     
+    /**
+     * Save settings into the settings.ini file
+     */
     public void saveSettings() {
         
     }

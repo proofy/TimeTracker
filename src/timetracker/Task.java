@@ -28,7 +28,7 @@ import java.util.Locale;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- *
+ * Represent one task.
  * @author Matthias Fischer
  */
 public class Task {
@@ -41,49 +41,92 @@ public class Task {
     private SimpleStringProperty project;
     private SimpleStringProperty description;
     
+    /**
+     * Constructor for new tasks
+     * @param project Project name
+     * @param description Project description
+     */
     Task(String project, String description) {
         this.project = new SimpleStringProperty(project);
         this.description = new SimpleStringProperty(description);
     }
     
+    /**
+     * Constructor for tasks out of a file
+     * @param fileString Saved task row of file
+     */
     Task(String fileString) {
         this.parseFileString(fileString);
     }
     
+    /**
+     * Start recording time
+     */
     public void start() {
         this.dateStart = Calendar.getInstance(Locale.GERMANY);
         this.start = new SimpleStringProperty(this.timeToString(dateStart));
     }
     
+    /**
+     * Stop recording time
+     */
     public void stop() {
         this.dateEnd = Calendar.getInstance(Locale.GERMANY);
         this.end = new SimpleStringProperty(this.timeToString(dateEnd));
     }
     
+    /**
+     * Getter of the start time
+     * @return Start time as String
+     */
     public String getStart() {
         return this.start.getValue();
     }
     
+    /**
+     * Getter of the end time
+     * @return End time as String
+     */
     public String getEnd() {
         return this.end.getValue();
     }
     
+    /**
+     * Getter of the project name
+     * @return Projectname as String
+     */
     public String getProject() {
         return this.project.getValue();
     }
     
+    /**
+     * Setter of the project name
+     * @param s Projectname as String
+     */
     public void setProject(String s) {
         this.project.setValue(s);
     }
     
+    /**
+     * Getter of the project description
+     * @return Project description as String
+     */
     public String getDescription() {
         return this.description.getValue();
     }
     
+    /**
+     * Setter of the project description
+     * @param s Project description as String
+     */
     public void setDescription(String s) {
         this.description.setValue(s);
     }
     
+    /**
+     * Convert task into string
+     * @return Task as String
+     */
     public String toFileString() {
         return this.project.getValue() + ";;;" 
                 + this.description.getValue() + ";;;" 
@@ -91,10 +134,22 @@ public class Task {
                 + Long.toString(this.dateEnd.getTimeInMillis()) + ";;;";
     }
     
+    /**
+     * Corrects length of a day/month.
+     * Examples: 
+     * 1. input is  '2' = output is '02'
+     * 2. input os '02' = output is '02'
+     * @param str Input String
+     * @return Corrected String
+     */
     public static String correctLength(String str) {
         return (str.length() == 1) ? "0" + str : str;
     }
     
+    /**
+     * Parse filestring into a task values
+     * @param str Filestring
+     */
     private void parseFileString(String str) {
         String[] string = str.split(";;;");
         this.project = new SimpleStringProperty(string[0]);
@@ -109,6 +164,11 @@ public class Task {
         this.end = new SimpleStringProperty(this.timeToString(this.dateEnd));
     }
     
+    /**
+     * Parse date into a time string like '12:42'
+     * @param cal Calender that should be converted
+     * @return Time as String
+     */
     private String timeToString(Calendar cal) {
         return this.correctLength(Integer.toString(cal.get(Calendar.HOUR_OF_DAY))) 
                 + ":" 

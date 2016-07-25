@@ -46,7 +46,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.controlsfx.control.textfield.TextFields;
 
 /**
- *
+ * Controller for the GUI. It handles the interaction with the dialog.
  * @author Matthias Fischer
  */
 public class ApplicationController implements Initializable {
@@ -75,6 +75,11 @@ public class ApplicationController implements Initializable {
     @FXML private TableColumn tcDescription;
     @FXML private TableView tvTasks;
     
+    /**
+     * Initialize the application xml and setup handling methods.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known
+     * @param rb The resources used to localize the root object, or null if the root object was not localized
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.started = false;
@@ -95,6 +100,10 @@ public class ApplicationController implements Initializable {
         this.loadTasks(this.today);
     }  
     
+    /**
+     * Handler for the start/stop button. It starts/stops the time recording for a task.
+     * @param event ActionEvent
+     */
     @FXML
     public void handleButtonStartStopAction(ActionEvent event) {
         
@@ -113,29 +122,48 @@ public class ApplicationController implements Initializable {
             this.task.stop();
             this.data.add(this.task);
             
-            EditFiles.saveIssues(EditFiles.getFilePath(this.selectedDay), this.data);
+            EditFiles.saveTasks(EditFiles.getFilePath(this.selectedDay), this.data);
             this.addProject(this.task);
         }
     }
     
-    @FXML void handleButtonPreviousDate(ActionEvent e) {
+    /**
+     * Handler for the button previous. It decrement the selected date. 
+     * @param event ActionEvent
+     */
+    @FXML 
+    public void handleButtonPreviousDate(ActionEvent event) {
         // -1 day
         this.selectedDay.setTimeInMillis(this.selectedDay.getTimeInMillis() - (1000 * 60 * 60 * 24));
         this.dpDate.setValue(this.dpDate.getValue().minusDays(1));
         this.handleDateChanged(null);
     }
     
-    @FXML void handleButtonNextDate(ActionEvent e) {
+    /**
+     * Handler for the button next. It increment the selected date.
+     * @param event ActionEvent
+     */
+    @FXML 
+    public void handleButtonNextDate(ActionEvent event) {
         // +1 day
         this.selectedDay.setTimeInMillis(this.selectedDay.getTimeInMillis() + (1000 * 60 * 60 * 24));
         this.dpDate.setValue(this.dpDate.getValue().plusDays(1));
         this.handleDateChanged(null);
     }
     
-    @FXML void handleDateChanged(ActionEvent e) {
+    /**
+     * Handler for date changed. It loads the tasks of the new date.
+     * @param event ActionEvent
+     */
+    @FXML 
+    public void handleDateChanged(ActionEvent event) {
         this.loadTasks(this.selectedDay);
     }
     
+    /**
+     * Handler for the button save. It saves changes from an existent task.
+     * @param event ActionEvent
+     */
     @FXML
     public void handleButtonSave(ActionEvent event) {
         Task iss = (Task)this.tvTasks.getSelectionModel().getSelectedItem();
@@ -145,13 +173,13 @@ public class ApplicationController implements Initializable {
         if(iss != null && !pro.equals("") && !desc.equals("")) {
             iss.setProject(pro);
             iss.setDescription(desc);
-            EditFiles.saveIssues(EditFiles.getFilePath(this.selectedDay), this.data);
+            EditFiles.saveTasks(EditFiles.getFilePath(this.selectedDay), this.data);
             this.loadTasks(this.selectedDay);
         }
     }
     /**
-     * Buttonhandler for the delete task button. It deletes the selected task.
-     * @param event
+     * Handler for the button delete task. It deletes the selected task.
+     * @param event ActionEvent
      */
     @FXML
     public void handleButtonDelete(ActionEvent event) {
@@ -170,7 +198,7 @@ public class ApplicationController implements Initializable {
                 if (dialogButton == yesButton) {
                     this.data.remove(i);
 
-                    EditFiles.saveIssues(EditFiles.getDirectory(this.selectedDay), this.data);
+                    EditFiles.saveTasks(EditFiles.getDirectory(this.selectedDay), this.data);
                     this.loadTasks(this.selectedDay);
                 }
                 return null;

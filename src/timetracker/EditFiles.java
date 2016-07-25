@@ -38,16 +38,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- *
- * @author mfi
+ * A collection of functions to interact with files.
+ * @author Matthias Fischer
  */
 public final class EditFiles {
     
-    
+    /**
+     * Creates a file in a specific location.
+     * @param path Path to file
+     */
     public static void createFile(String path) {
         createFile(path, false);
     }
     
+    /**
+     * Creates a file or a directory in a specific location.
+     * @param path Path to file
+     * @param isDirectory Is a directory? yes = true : no = false
+     */
     public static void createFile(String path, Boolean isDirectory) {
         try {
             File file = new File(path);
@@ -64,6 +72,11 @@ public final class EditFiles {
         
     }
     
+    /**
+     * Reads all lines of a file.
+     * @param path Path to file
+     * @return List of strings
+     */
     public static List<String> readFile(String path) {
         String line = null;
         List<String> records = new ArrayList<>();
@@ -86,7 +99,12 @@ public final class EditFiles {
         return records;
     }
     
-    public static void saveIssues(String path, ObservableList<Task> data) {
+    /**
+     * Writes tasks into a specific file.
+     * @param path Path to file
+     * @param data Tasks that should be saved
+     */
+    public static void saveTasks(String path, ObservableList<Task> data) {
         ObservableList<String> list = FXCollections.observableArrayList();
         for(int i = 0; i < data.size(); i++) {
             list.add(data.get(i).toFileString());
@@ -95,13 +113,18 @@ public final class EditFiles {
         saveFile(path, list);
     }
     
-    public static void saveFile(String path, ObservableList<String> data) {
+    /**
+     * Writes strings into a specific file.
+     * @param path Path to file
+     * @param strings Strings that should be saved
+     */
+    public static void saveFile(String path, ObservableList<String> strings) {
         Writer writer = null;
         
         try {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "utf-8"));
-            for(int i=0; i < data.size(); i++) {
-                writer.append(data.get(i) + "\n");
+            for(int i=0; i < strings.size(); i++) {
+                writer.append(strings.get(i) + "\n");
             }
             
         } catch(IOException e) {
@@ -111,6 +134,11 @@ public final class EditFiles {
         }
     }
     
+    /**
+     * Convert a date into a directory-hierarchie.
+     * @param date Date that should be converted
+     * @return Directory-hierarchie as a String
+     */
     public static String getDirectory(Calendar date) {
         String year = Integer.toString(date.get(Calendar.YEAR));
         String month = Task.correctLength(Integer.toString(date.get(Calendar.MONTH)));
@@ -118,6 +146,11 @@ public final class EditFiles {
         return "./files/" + year + "/" + month + "/";
     }
     
+    /**
+     * Converts a date into a filename.
+     * @param date Date that should be converted
+     * @return filename as a String
+     */
     public static String getFilePath(Calendar date) {
         
         String year = Integer.toString(date.get(Calendar.YEAR));
