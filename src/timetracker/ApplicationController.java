@@ -200,7 +200,7 @@ public class ApplicationController implements Initializable {
                 if (dialogButton == yesButton) {
                     this.data.remove(t);
 
-                    EditFiles.saveTasks(EditFiles.getDirectory(this.selectedDay), this.data);
+                    EditFiles.saveTasks(EditFiles.getFilePath(this.selectedDay), this.data);
                     this.loadTasks(this.selectedDay);
                 }
                 return null;
