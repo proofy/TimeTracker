@@ -23,66 +23,48 @@
  */
 package timetracker;
 
-import java.util.List;
-import javafx.collections.ObservableList;
-
 /**
- * Manage settings.
+ * Simple setting of the file settings.ini
  * @author Matthias Fischer
  */
-public class Settings {
+public class Setting {
     
-    private final String path = "./settings.ini";
+    private String key;
+    private String value;
     
-    private boolean autostart;
-    
-    Settings() {
-        EditFiles.createFile(this.path);
+    /**
+     * Constructor of a setting
+     * @param key Key of the setting
+     * @param value Value of the setting
+     */
+    Setting(String key, String value) {
+        this.key = key;
+        this.value = value;
     }
     
     /**
-     * Load settings out of the settings.ini file
+     * Creates an instance of the class Setting.
+     * @param line Row of the file settings.ini
+     * @return Setting instance
      */
-    public void loadSettings() {
-        this.parseSettings(EditFiles.readFile(this.path));
+    public static Setting instanceOf(String line) {
+        String[] str = line.split("=");
+        return new Setting(str[0], str[1]);
     }
     
     /**
-     * Save settings into the settings.ini file
+     * Getter of keyname
+     * @return String key
      */
-    public void saveSettings() {
-        
+    public String getKey() {
+        return this.key;
     }
     
     /**
-     * Setter autostart application
-     * @param b Boolean
+     * Getter of value
+     * @return String value
      */
-    public void setAutostart(Boolean b) {
-        this.autostart = b;
-    }
-    
-    /**
-     * Getter autostart application
-     * @return Boolean
-     */
-    public Boolean getAutostart() {
-        return this.autostart;
-    }
-    
-    /**
-     * Parses settings.ini file
-     * @param list Rows of settings.ini file
-     */
-    private void parseSettings(List<String> list) {
-        Setting tmpSetting;
-        for(int i = 0; i < list.size(); i++) {
-            tmpSetting = Setting.instanceOf(list.get(i)); 
-            switch(tmpSetting.getKey()) {
-                case "autostart":
-                    this.autostart = tmpSetting.getValue().equals("true");
-                    break;
-            }
-        }
+    public String getValue() {
+        return this.value;
     }
 }
