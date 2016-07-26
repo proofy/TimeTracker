@@ -96,6 +96,8 @@ public class ApplicationController implements Initializable {
         TextFields.bindAutoCompletion(this.tfProject, this.autoProjects);       
         
         this.initFilesystem();
+        this.settings = new Settings();
+        this.settings.loadSettings();
         
         this.loadProjects();
         this.initTaskTable();
