@@ -29,17 +29,15 @@
                           <menus>
                             <Menu mnemonicParsing="false" text="File">
                               <items>
-                                <MenuItem mnemonicParsing="false" text="Close" />
-                              </items>
-                            </Menu>
-                            <Menu mnemonicParsing="false" text="Edit">
-                              <items>
-                                <MenuItem mnemonicParsing="false" text="Delete" />
+                                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemImport" text="Import" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleMenuItemExport" text="Export" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleMenuItemSettings" text="Settings" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleMenuItemExit" text="Exit" />
                               </items>
                             </Menu>
                             <Menu mnemonicParsing="false" text="Help">
                               <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
+                                <MenuItem mnemonicParsing="false" onAction="#handleMenuItemAbout" text="About" />
                               </items>
                             </Menu>
                           </menus>

@@ -135,10 +135,10 @@ public class Task {
     }
     
     /**
-     * Corrects length of a day/month.
+     * Corrects length of a day/month-string.
      * Examples: 
      * 1. input is  '2' = output is '02'
-     * 2. input os '02' = output is '02'
+     * 2. input is '02' = output is '02'
      * @param str Input String
      * @return Corrected String
      */

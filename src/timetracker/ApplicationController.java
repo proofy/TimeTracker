@@ -34,11 +34,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -98,8 +100,8 @@ public class ApplicationController implements Initializable {
         this.loadProjects();
         this.initTaskTable();
         this.loadTasks(this.today);
-    }  
-    
+    } 
+        
     /**
      * Handler for the start/stop button. It starts/stops the time recording for a task.
      * @param event ActionEvent
@@ -206,6 +208,55 @@ public class ApplicationController implements Initializable {
             
             dia.showAndWait();
         }
+    }
+    
+    /**
+     * Handler for the menuitem import. It triggers a import of backed up tasks.
+     * @param event ActionEvent
+     */
+    @FXML
+    public void handleMenuItemImport(ActionEvent event) {
+        
+    }
+
+    /**
+     * Handler for the menuitem export. It triggers a backup of the tasks
+     * @param event ActionEvent
+     */
+    @FXML
+    public void handleMenuItemExport(ActionEvent event) {
+        
+    }
+    
+    /**
+     * Handler for the menuitem settings. It opens a settingdialog.
+     * @param event ActionEvent
+     */
+    @FXML
+    public void handleMenuItemSettings(ActionEvent event) {
+        
+    }
+    
+    /**
+     * Handler fo the menuitem exit. It closes the application.
+     * @param event ActionEvent
+     */
+    @FXML
+    public void handleMenuItemExit(ActionEvent event) {
+        System.exit(0);
+    }
+    
+    /**
+     * Handler for the menuitem about. Opens a dialog with informations about the application.
+     * @param event ActionEvent
+     */
+    @FXML
+    public void handleMenuItemAbout(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About TimeTracker");
+        alert.setHeaderText("TimeTracker v0.1");
+        alert.setContentText("URL:\t\thttps://matze-fischer.de\nE-Mail:\tcontact@matze-fischer.de");
+        alert.showAndWait();
     }
     
     /**
