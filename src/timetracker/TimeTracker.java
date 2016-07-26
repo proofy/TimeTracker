@@ -40,7 +40,7 @@ import javafx.stage.StageStyle;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * 
  * @author Matthias Fischer
  */
 public class TimeTracker extends Application {

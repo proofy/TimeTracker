@@ -185,11 +185,11 @@ public class ApplicationController implements Initializable {
      */
     @FXML
     public void handleButtonDelete(ActionEvent event) {
-        Task i = (Task)this.tvTasks.getSelectionModel().getSelectedItem();
-        if(i != null) {
+        Task t = (Task)this.tvTasks.getSelectionModel().getSelectedItem();
+        if(t != null) {
             Dialog dia = new Dialog();
             dia.setTitle("Delete task");
-            dia.setHeaderText("Delete task \"" + i.getProject() + ": " + i.getDescription() + "\"");
+            dia.setHeaderText("Delete task \"" + t.getProject() + ": " + t.getDescription() + "\"");
             dia.setContentText("Are you sure you want to delete the selected task?");
             
             ButtonType yesButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
@@ -198,7 +198,7 @@ public class ApplicationController implements Initializable {
             
             dia.setResultConverter(dialogButton -> {
                 if (dialogButton == yesButton) {
-                    this.data.remove(i);
+                    this.data.remove(t);
 
                     EditFiles.saveTasks(EditFiles.getDirectory(this.selectedDay), this.data);
                     this.loadTasks(this.selectedDay);
