@@ -53,6 +53,24 @@ public class Setting {
     }
     
     /**
+     * Creates a string of a setting for the settings.ini file
+     * @param key Key of the setting
+     * @param value Value of the setting
+     * @return String for the settings.ini file
+     */
+    public static String createFileString(String key, String value) {
+        return key + "=" + value;
+    }
+    
+    /**
+     * Creates a string of this instance for the settings.ini file
+     * @return String for the settings.ini file
+     */
+    public String createFileString() {
+        return this.createFileString(this.key, this.value);
+    }
+    
+    /**
      * Getter of keyname
      * @return String key
      */

@@ -24,6 +24,7 @@
 package timetracker;
 
 import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -51,7 +52,11 @@ public class Settings {
      * Save settings into the settings.ini file
      */
     public void saveSettings() {
+        ObservableList<String> rows = FXCollections.observableArrayList();
         
+        rows.add(Setting.createFileString("autostart", String.valueOf(this.autostart)));
+        
+        EditFiles.saveFile(this.path, rows);
     }
     
     /**
