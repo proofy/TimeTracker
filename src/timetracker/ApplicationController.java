@@ -55,7 +55,8 @@ import org.controlsfx.control.textfield.TextFields;
  */
 public class ApplicationController implements Initializable {
     
-    private final String pathProjects = "./files/projectlist.txt";
+    private final String pathFiles = "./files";
+    private final String pathProjects = this.pathFiles + "/projectlist.txt";
     
     private boolean started;
     private Task task;
@@ -226,7 +227,7 @@ public class ApplicationController implements Initializable {
         File importFile = fileChooser.showOpenDialog(root.getScene().getWindow());
         
         if(importFile != null) {
-            Packager.unzip(importFile, "./files");
+            Packager.unzip(importFile, this.pathFiles);
             this.loadTasks(this.selectedDay);
         }
     }
