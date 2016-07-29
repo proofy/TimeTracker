@@ -68,15 +68,16 @@ public class ApplicationController implements Initializable {
     private Calendar selectedDay;
     
     @FXML private AnchorPane root;
-    
     @FXML private DatePicker dpDate;
     
     @FXML private Button btnStartStop;
     @FXML private TextField tfProject;
     @FXML private TextField tfDescription;
+    @FXML private TextField tfStartTime;
+    @FXML private TextField tfEndTime;
     
-    @FXML private TableColumn tcFrom;
-    @FXML private TableColumn tcTo;
+    @FXML private TableColumn tcStartTime;
+    @FXML private TableColumn tcEndTime;
     @FXML private TableColumn tcProject;
     @FXML private TableColumn tcDescription;
     @FXML private TableView tvTasks;
@@ -118,6 +119,9 @@ public class ApplicationController implements Initializable {
                 this.btnStartStop.setText("Stop");
                 this.task = new Task(this.tfProject.getText(), this.tfDescription.getText());
                 this.task.start();
+                
+                this.tfStartTime.setText(this.task.getStartTime());
+                this.tfEndTime.setText(this.task.getEndTime());
             }
         } else {
             
@@ -127,6 +131,9 @@ public class ApplicationController implements Initializable {
             
             EditFiles.saveTasks(EditFiles.getFilePath(this.selectedDay), this.data);
             this.addProject(this.task);
+            
+            this.tfStartTime.setText("");
+            this.tfEndTime.setText("");
         }
     }
     
@@ -169,15 +176,20 @@ public class ApplicationController implements Initializable {
      */
     @FXML
     public void handleButtonSave(ActionEvent event) {
-        Task iss = (Task)this.tvTasks.getSelectionModel().getSelectedItem();
+        Task task = (Task)this.tvTasks.getSelectionModel().getSelectedItem();
         String pro = this.tfProject.getText();
         String desc = this.tfDescription.getText();
+        String startTime = this.tfStartTime.getText();
+        String endTime = this.tfEndTime.getText();
         
-        if(iss != null && !pro.equals("") && !desc.equals("")) {
-            iss.setProject(pro);
-            iss.setDescription(desc);
-            EditFiles.saveTasks(EditFiles.getFilePath(this.selectedDay), this.data);
-            this.loadTasks(this.selectedDay);
+        if(task != null && !pro.equals("") && !desc.equals("") && !startTime.equals("") && !endTime.equals("")) {
+            task.setProject(pro);
+            task.setDescription(desc);
+            
+            if(task.setStartTime(startTime) && task.setEndTime(endTime)) {
+                EditFiles.saveTasks(EditFiles.getFilePath(this.selectedDay), this.data);
+                this.loadTasks(this.selectedDay);
+            }
         }
     }
     /**
@@ -273,8 +285,8 @@ public class ApplicationController implements Initializable {
      * Also it defines a selection-handler for the table.
      */
     private void initTaskTable() {
-        this.tcFrom.setCellValueFactory(new PropertyValueFactory<>("start"));
-        this.tcTo.setCellValueFactory(new PropertyValueFactory<>("end"));
+        this.tcStartTime.setCellValueFactory(new PropertyValueFactory<>("start"));
+        this.tcEndTime.setCellValueFactory(new PropertyValueFactory<>("end"));
         this.tcProject.setCellValueFactory(new PropertyValueFactory<>("project"));
         this.tcDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         this.tvTasks.setItems(this.data);
@@ -283,9 +295,14 @@ public class ApplicationController implements Initializable {
             if(newSelection != null) {
                 tfProject.setText(((Task)newSelection).getProject());
                 tfDescription.setText(((Task)newSelection).getDescription());
+                tfStartTime.setText(((Task)newSelection).getStartTime());
+                tfEndTime.setText(((Task)newSelection).getEndTime());
+                
             } else {
                 tfProject.setText("");
                 tfDescription.setText("");
+                tfStartTime.setText("");
+                tfEndTime.setText("");
             }
         });  
     }

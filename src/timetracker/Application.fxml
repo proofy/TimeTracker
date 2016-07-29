@@ -57,8 +57,8 @@
                   </ButtonBar>
                   <TableView fx:id="tvTasks" maxWidth="480.0" minWidth="480.0" prefWidth="480.0">
                     <columns>
-                      <TableColumn fx:id="tcFrom" editable="false" prefWidth="45.0" resizable="false" sortable="false" text="Start" />
-                      <TableColumn fx:id="tcTo" editable="false" prefWidth="45.0" resizable="false" sortable="false" text="End" />
+                      <TableColumn fx:id="tcStartTime" editable="false" prefWidth="45.0" resizable="false" sortable="false" text="Start" />
+                      <TableColumn fx:id="tcEndTime" editable="false" prefWidth="45.0" resizable="false" sortable="false" text="End" />
                         <TableColumn fx:id="tcProject" editable="false" prefWidth="120.0" resizable="false" sortable="false" text="Project" />
                         <TableColumn fx:id="tcDescription" editable="false" prefWidth="270.0" resizable="false" sortable="false" text="Description" />
                     </columns>
@@ -90,12 +90,12 @@
                               <Button fx:id="btnDelete" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonDelete" prefHeight="25.0" text="Delete" />
                           </buttons>
                         </ButtonBar>
-                        <TextField promptText="Start">
+                        <TextField fx:id="tfStartTime" promptText="Start">
                            <GridPane.margin>
                               <Insets right="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField promptText="End" GridPane.rowIndex="1">
+                        <TextField fx:id="tfEndTime" promptText="End" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="10.0" />
                            </GridPane.margin>

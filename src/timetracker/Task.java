@@ -128,6 +128,60 @@ public class Task {
     }
     
     /**
+     * Set start time of a task in "hh:mm" format
+     * @param s time
+     * @return Boolean checks if the values are okay.
+     */
+    public Boolean setStartTime(String s) {
+        
+        String str[] = s.split(":");
+        int hours = Integer.parseInt(str[0]);
+        int minutes = Integer.parseInt(str[1]);
+        
+        if(hours >= 0 && hours < 25 && minutes >= 0 && minutes < 60) {
+            this.dateStart.set(Calendar.HOUR_OF_DAY, hours);
+            this.dateStart.set(Calendar.MINUTE, minutes);
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Get start time of a task in "hh:mm" format
+     * @return String "hh:mm" of start time
+     */
+    public String getStartTime() {
+        return (this.dateStart != null) ? this.timeToString(dateStart) : "";
+    }
+    
+    /**
+     * Set end time of a task in "hh:mm" format
+     * @param s time
+     * @return Boolean checks if the values were okay
+     */
+    public Boolean setEndTime(String s) {
+        
+        String str[] = s.split(":");
+        int hours = Integer.parseInt(str[0]);
+        int minutes = Integer.parseInt(str[1]);
+        
+        if(hours >= 0 && hours < 25 && minutes >= 0 && minutes < 60) {
+            this.dateEnd.set(Calendar.HOUR_OF_DAY, hours);
+            this.dateEnd.set(Calendar.MINUTE, minutes);
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Get end time of a task in "hh:mm" format
+     * @return String "hh:mm" of end time
+     */
+    public String getEndTime() {
+        return (this.dateEnd != null) ? this.timeToString(dateEnd) : "";
+    }
+    
+    /**
      * Time recording activated?
      * @return Boolean
      */
