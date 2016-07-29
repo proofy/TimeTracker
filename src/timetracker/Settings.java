@@ -23,7 +23,9 @@
  */
 package timetracker;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -34,18 +36,18 @@ import javafx.collections.ObservableList;
 public class Settings {
     
     private final String path = "./settings.ini";
-    
-    private boolean autostart;
+    private final Map<String, Setting> list;
     
     Settings() {
         EditFiles.createFile(this.path);
+        this.list = new HashMap<>();
     }
     
     /**
      * Load settings out of the settings.ini file
      */
     public void loadSettings() {
-        this.parseSettings(EditFiles.readFile(this.path));
+        this.parseSettingFile(EditFiles.readFile(this.path));
     }
     
     /**
@@ -53,41 +55,43 @@ public class Settings {
      */
     public void saveSettings() {
         ObservableList<String> rows = FXCollections.observableArrayList();
-        
-        rows.add(Setting.createFileString("autostart", String.valueOf(this.autostart)));
+
+        for (Map.Entry<String, Setting> entry : list.entrySet())
+        {
+            rows.add(entry.getValue().createFileString());
+        }
         
         EditFiles.saveFile(this.path, rows);
     }
     
     /**
-     * Setter autostart application
-     * @param b Boolean
+     * Setter for boolean setting - overides if this setting already exists
+     * @param key Key of the setting
+     * @param value Value of this setting
      */
-    public void setAutostart(Boolean b) {
-        this.autostart = b;
+    public void setSettingBoolean(String key, Boolean value) {
+        Setting tmpSetting = new Setting(key, String.valueOf(value));
+        this.list.put(key, tmpSetting);
     }
     
     /**
-     * Getter autostart application
-     * @return Boolean
+     * Getter for boolean setting
+     * @param key Key of the setting
+     * @return Boolean value of the setting - null if not available
      */
-    public Boolean getAutostart() {
-        return this.autostart;
+    public Boolean getSettingBoolean(String key) {
+        return this.list.get(key).getValue().equals("true");
     }
     
     /**
      * Parses settings.ini file
      * @param list Rows of settings.ini file
      */
-    private void parseSettings(List<String> list) {
+    private void parseSettingFile(List<String> list) {
         Setting tmpSetting;
         for(int i = 0; i < list.size(); i++) {
             tmpSetting = Setting.instanceOf(list.get(i)); 
-            switch(tmpSetting.getKey()) {
-                case "autostart":
-                    this.autostart = tmpSetting.getValue().equals("true");
-                    break;
-            }
+            this.list.put(tmpSetting.getKey(), tmpSetting);
         }
     }
 }

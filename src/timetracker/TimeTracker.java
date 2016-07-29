@@ -45,9 +45,10 @@ import javax.swing.ImageIcon;
  */
 public class TimeTracker extends Application {
     
+    public Settings settings;
+    
     @Override
     public void start(Stage stage) throws Exception {
-        Platform.setImplicitExit(false);
         
         Parent root = FXMLLoader.load(getClass().getResource("Application.fxml"));
         Scene scene = new Scene(root);
@@ -58,9 +59,13 @@ public class TimeTracker extends Application {
         stage.initStyle(StageStyle.UTILITY);
         stage.getIcons().add(new javafx.scene.image.Image("/images/logo.png"));
         
+        this.settings = new Settings();
+        this.settings.loadSettings();
+        
         stage.show();
         
-        if (SystemTray.isSupported()) {         
+        if (SystemTray.isSupported() && this.settings.getSettingBoolean("useSystemTray")) {  
+            Platform.setImplicitExit(false);
             SystemTray tray = SystemTray.getSystemTray();
 
             PopupMenu popup = new PopupMenu();

@@ -40,11 +40,12 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import org.controlsfx.control.textfield.TextFields;
 
 /**
@@ -64,6 +65,8 @@ public class ApplicationController implements Initializable {
     
     private Calendar today;
     private Calendar selectedDay;
+    
+    @FXML private AnchorPane root;
     
     @FXML private DatePicker dpDate;
     
@@ -85,8 +88,6 @@ public class ApplicationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.started = false;
-        
-        this.settings = new Settings();
         
         this.dpDate.setValue(LocalDate.now());
         this.today = this.selectedDay = Calendar.getInstance();
@@ -218,7 +219,10 @@ public class ApplicationController implements Initializable {
      */
     @FXML
     public void handleMenuItemImport(ActionEvent event) {
-        
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TimeTracker", "*.tt"));
+        fileChooser.setTitle("Import Backup");
+        fileChooser.showOpenDialog(root.getScene().getWindow());
     }
 
     /**
