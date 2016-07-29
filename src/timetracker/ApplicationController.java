@@ -23,6 +23,7 @@
  */
 package timetracker;
 
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -222,7 +223,12 @@ public class ApplicationController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TimeTracker", "*.tt"));
         fileChooser.setTitle("Import Backup");
-        fileChooser.showOpenDialog(root.getScene().getWindow());
+        File importFile = fileChooser.showOpenDialog(root.getScene().getWindow());
+        
+        if(importFile != null) {
+            Packager.unzip(importFile, "./files");
+            this.loadTasks(this.selectedDay);
+        }
     }
 
     /**
