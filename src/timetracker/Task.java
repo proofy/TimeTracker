@@ -32,6 +32,8 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Matthias Fischer
  */
 public class Task {
+    
+    private Boolean started = false;
         
     private Calendar dateStart;
     private Calendar dateEnd;
@@ -65,6 +67,7 @@ public class Task {
     public void start() {
         this.dateStart = Calendar.getInstance(Locale.GERMANY);
         this.start = new SimpleStringProperty(this.timeToString(dateStart));
+        this.started = true;
     }
     
     /**
@@ -73,6 +76,7 @@ public class Task {
     public void stop() {
         this.dateEnd = Calendar.getInstance(Locale.GERMANY);
         this.end = new SimpleStringProperty(this.timeToString(dateEnd));
+        this.started = false;
     }
     
     /**
@@ -121,6 +125,14 @@ public class Task {
      */
     public void setDescription(String s) {
         this.description.setValue(s);
+    }
+    
+    /**
+     * Time recording activated?
+     * @return Boolean
+     */
+    public Boolean isStarted() {
+        return this.started;
     }
     
     /**

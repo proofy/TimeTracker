@@ -58,7 +58,6 @@ public class ApplicationController implements Initializable {
     private final String pathFiles = "./files";
     private final String pathProjects = this.pathFiles + "/projectlist.txt";
     
-    private boolean started;
     private Task task;
     private Settings settings;
     
@@ -89,7 +88,6 @@ public class ApplicationController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.started = false;
         
         this.dpDate.setValue(LocalDate.now());
         this.today = this.selectedDay = Calendar.getInstance();
@@ -114,18 +112,16 @@ public class ApplicationController implements Initializable {
     @FXML
     public void handleButtonStartStopAction(ActionEvent event) {
         
-        if(!this.started) {
+        if(this.task == null || !this.task.isStarted()) {
             if(!this.tfProject.getText().isEmpty() && !this.tfDescription.getText().isEmpty()) {
             
                 this.btnStartStop.setText("Stop");
                 this.task = new Task(this.tfProject.getText(), this.tfDescription.getText());
                 this.task.start();
-                this.started = true;
             }
         } else {
             
             this.btnStartStop.setText("Start");
-            this.started = false;
             this.task.stop();
             this.data.add(this.task);
             
