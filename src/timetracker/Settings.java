@@ -80,7 +80,11 @@ public class Settings {
      * @return Boolean value of the setting - null if not available
      */
     public Boolean getSettingBoolean(String key) {
-        return this.list.get(key).getValue().equals("true");
+        Setting tmp = this.list.get(key);
+        if(tmp != null) {
+            return tmp.getValue().equals("true");
+        }
+        return false;
     }
     
     /**
