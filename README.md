@@ -19,7 +19,7 @@ is a software which protocols the working hours for an project. Just a few steps
 - [X] create directory hierarchie yyyy/mm/dd
 - [X] hide in systemtray
 - [X] import backup
+- [X] backup(create zip)
 - [ ] menubar
-- [ ] backup(create zip)
 - [ ] autostart on systemstart
 - [ ] option menu
