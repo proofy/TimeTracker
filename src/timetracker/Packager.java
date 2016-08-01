@@ -46,47 +46,51 @@ public class Packager {
      * @param zipFile Target file
      */
     public static void zip(String targetPath, File zipFile) {
-        FileOutputStream fos = null;
+        FileOutputStream fos;
+        ZipOutputStream zos;
+        String filePath;
+        
         try {
             byte[] buffer = new byte[1024];
+            File targetFile = new File(targetPath);
+            List<String> targetFiles = Packager.generateFileList(targetFile);
+            
             fos = new FileOutputStream(zipFile);
-            ZipOutputStream zos = new ZipOutputStream(fos);
-            
-            List<String> targetFiles = Packager.generateFileList(new File(targetPath));
-            
-            targetFiles.forEach(fileName -> {
-                FileInputStream in = null;
+            zos = new ZipOutputStream(fos);
+                
+            for(int i = targetFiles.size()-1; i >= 0; i--) {
                 try {
                     int len;
-                    in = new FileInputStream(new File(fileName));
-                    
+                    FileInputStream in;
+                    filePath = targetFiles.get(i);
+                    filePath = filePath.subSequence(targetFile.getPath().length()+1, filePath.length()).toString();
+
+                    ZipEntry ze = new ZipEntry(filePath);
+                    zos.putNextEntry(ze);
+
+                    in = new FileInputStream(new File(targetFile.getAbsolutePath() + File.separator + filePath));
+
                     while ((len = in.read(buffer)) > 0) {
                         zos.write(buffer, 0, len);
                     }
-                    
+
                     in.close();
-                    
+
                 } catch (FileNotFoundException e) {
                     System.err.println(e.getMessage());
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
-                } finally {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        System.err.println(e.getMessage());
-                    }
                 }
-            });
+            }
+
+            zos.closeEntry();
+            zos.close();
+            fos.close();
             
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
     }
     
@@ -133,10 +137,15 @@ public class Packager {
         }
     }
     
+    /**
+     * Lists all files in a specific directory and returns them as a arraylist of strings.
+     * @param node Targetdirectory
+     * @return ArrayList of files
+     */
     public static List<String> generateFileList(File node) {
         List<String> list = new ArrayList<>();
         if(node.isFile()) {
-            list.add(node.getAbsolutePath() + File.separator + node.getName());
+            list.add(node.getPath());
         }
         
         if(node.isDirectory()) {
@@ -144,8 +153,7 @@ public class Packager {
             List<String> tmpArraylist;
             
             for(String filename : subNodes) {
-                tmpArraylist = Packager.generateFileList(new File(filename));
-                
+                tmpArraylist = Packager.generateFileList(new File(node.getPath()+ File.separator + filename));
                 tmpArraylist.forEach(string -> {
                     list.add(string);
                 });

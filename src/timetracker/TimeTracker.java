@@ -102,8 +102,6 @@ public class TimeTracker extends Application {
             } catch (Exception e) {
                 System.err.println("Can't add to tray");
             }
-        } else {
-            System.err.println("Tray unavailable");
         } 
     }
 

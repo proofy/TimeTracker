@@ -237,6 +237,7 @@ public class ApplicationController implements Initializable {
         if(importFile != null) {
             Packager.unzip(importFile, this.pathFiles);
             this.loadTasks(this.selectedDay);
+            this.loadProjects();
         }
     }
 
@@ -246,7 +247,15 @@ public class ApplicationController implements Initializable {
      */
     @FXML
     public void handleMenuItemExport(ActionEvent event) {
-        Packager.zip("./files", new File("./zip.zip"));
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TimeTracker", "*.tt"));
+        fileChooser.setTitle("Export Backup");
+        fileChooser.setInitialFileName(EditFiles.getFilename(this.today) + "_backup");
+        
+        File exportFile = fileChooser.showSaveDialog(root.getScene().getWindow());
+        if(exportFile != null) {
+            Packager.zip(this.pathFiles, exportFile);
+        }
     }
     
     /**

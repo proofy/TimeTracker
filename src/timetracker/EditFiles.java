@@ -89,6 +89,7 @@ public final class EditFiles {
                     {
                         records.add(line);
                     }
+                    bufferedReader.close();
                 }
             } catch(IOException e) {
                 System.err.println(e.getMessage());
@@ -124,12 +125,25 @@ public final class EditFiles {
             for(int i=0; i < strings.size(); i++) {
                 writer.append(strings.get(i) + "\n");
             }
+            writer.close();
             
         } catch(IOException e) {
             System.err.println(e.getMessage());
         } finally {
             try {if(writer != null) writer.close();} catch (Exception e) {}
         }
+    }
+    
+    /**
+     * Converts a date into a filename
+     * @param date Date that should be converted
+     * @return filename as a String
+     */
+    public static String getFilename(Calendar date) {
+        String year = Integer.toString(date.get(Calendar.YEAR));
+        String month = Task.correctLength(Integer.toString(date.get(Calendar.MONTH)));
+        String day = Task.correctLength(Integer.toString(date.get(Calendar.DAY_OF_MONTH)));
+        return year + "-" + month + "-" + day;
     }
     
     /**
@@ -145,16 +159,11 @@ public final class EditFiles {
     }
     
     /**
-     * Converts a date into a filename.
+     * Converts a date into a filepath with .txt-Extension.
      * @param date Date that should be converted
-     * @return filename as a String
+     * @return filepath as a String
      */
     public static String getFilePath(Calendar date) {
-        
-        String year = Integer.toString(date.get(Calendar.YEAR));
-        String month = Task.correctLength(Integer.toString(date.get(Calendar.MONTH)));
-        String day = Task.correctLength(Integer.toString(date.get(Calendar.DAY_OF_MONTH)));
-        
-        return getDirectory(date) + year + "-" + month + "-" + day + ".txt";
+        return EditFiles.getDirectory(date) + EditFiles.getFilename(date) + ".txt";
     }
 }
