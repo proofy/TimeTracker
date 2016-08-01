@@ -28,7 +28,6 @@ import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
-import java.awt.event.ActionListener;
 import java.net.URL;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -70,17 +69,11 @@ public class TimeTracker extends Application {
 
             PopupMenu popup = new PopupMenu();
             MenuItem itemOpen = new MenuItem("Open");
-            itemOpen.addActionListener(new ActionListener() {                
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent arg0) {
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            stage.show();
-                            stage.toFront();
-                        }
-                    });
-                }               
+            itemOpen.addActionListener((java.awt.event.ActionEvent arg0) -> {
+                Platform.runLater(() -> {
+                    stage.show();
+                    stage.toFront();
+                });               
             });
             
             MenuItem itemExit = new MenuItem("Exit");
@@ -93,24 +86,15 @@ public class TimeTracker extends Application {
             TrayIcon trayIcon = new TrayIcon(img, "TimeTracker", popup); 
             trayIcon.setImageAutoSize(true);
             
-            trayIcon.addActionListener(new ActionListener() {                
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent arg0) {                
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            stage.show();
-                        }
-                   });
-                }                   
+            trayIcon.addActionListener((java.awt.event.ActionEvent arg0) -> {
+                Platform.runLater(() -> {
+                    stage.show();
+                });                   
             });
 
-            itemExit.addActionListener(new ActionListener() {                
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent arg0) {
-                    tray.remove(trayIcon);
-                    System.exit(0);                 
-                }               
+            itemExit.addActionListener((java.awt.event.ActionEvent arg0) -> {
+                tray.remove(trayIcon);
+                System.exit(0);               
             });
             
             try{

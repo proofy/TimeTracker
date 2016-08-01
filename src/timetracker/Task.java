@@ -236,8 +236,8 @@ public class Task {
      * @return Time as String
      */
     private String timeToString(Calendar cal) {
-        return this.correctLength(Integer.toString(cal.get(Calendar.HOUR_OF_DAY))) 
+        return Task.correctLength(Integer.toString(cal.get(Calendar.HOUR_OF_DAY))) 
                 + ":" 
-                + this.correctLength(Integer.toString(cal.get(Calendar.MINUTE)));
+                + Task.correctLength(Integer.toString(cal.get(Calendar.MINUTE)));
     }
 }

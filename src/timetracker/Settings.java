@@ -56,10 +56,9 @@ public class Settings {
     public void saveSettings() {
         ObservableList<String> rows = FXCollections.observableArrayList();
 
-        for (Map.Entry<String, Setting> entry : list.entrySet())
-        {
+        list.entrySet().stream().forEach((entry) -> {
             rows.add(entry.getValue().createFileString());
-        }
+        });
         
         EditFiles.saveFile(this.path, rows);
     }

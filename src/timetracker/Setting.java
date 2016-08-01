@@ -29,8 +29,8 @@ package timetracker;
  */
 public class Setting {
     
-    private String key;
-    private String value;
+    private final String key;
+    private final String value;
     
     /**
      * Constructor of a setting
@@ -67,7 +67,7 @@ public class Setting {
      * @return String for the settings.ini file
      */
     public String createFileString() {
-        return this.createFileString(this.key, this.value);
+        return Setting.createFileString(this.key, this.value);
     }
     
     /**

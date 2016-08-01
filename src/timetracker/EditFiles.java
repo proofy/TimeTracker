@@ -67,7 +67,7 @@ public final class EditFiles {
                  }
             }
         } catch(IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
         
     }
@@ -78,22 +78,20 @@ public final class EditFiles {
      * @return List of strings
      */
     public static List<String> readFile(String path) {
-        String line = null;
+        String line;
         List<String> records = new ArrayList<>();
         File file = new File(path);
         
         if(file.exists()) {
             try {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
-
-                while ((line = bufferedReader.readLine()) != null)
-                {
-                    records.add(line);
+                try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
+                    while ((line = bufferedReader.readLine()) != null)
+                    {
+                        records.add(line);
+                    }
                 }
-
-                bufferedReader.close();
             } catch(IOException e) {
-                e.printStackTrace();
+                System.err.println(e.getMessage());
             }
         }
         return records;
@@ -128,7 +126,7 @@ public final class EditFiles {
             }
             
         } catch(IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         } finally {
             try {if(writer != null) writer.close();} catch (Exception e) {}
         }

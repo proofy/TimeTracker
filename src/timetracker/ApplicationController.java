@@ -176,17 +176,17 @@ public class ApplicationController implements Initializable {
      */
     @FXML
     public void handleButtonSave(ActionEvent event) {
-        Task task = (Task)this.tvTasks.getSelectionModel().getSelectedItem();
+        Task tmpTask = (Task)this.tvTasks.getSelectionModel().getSelectedItem();
         String pro = this.tfProject.getText();
         String desc = this.tfDescription.getText();
         String startTime = this.tfStartTime.getText();
         String endTime = this.tfEndTime.getText();
         
-        if(task != null && !pro.equals("") && !desc.equals("") && !startTime.equals("") && !endTime.equals("")) {
-            task.setProject(pro);
-            task.setDescription(desc);
+        if(tmpTask != null && !pro.equals("") && !desc.equals("") && !startTime.equals("") && !endTime.equals("")) {
+            tmpTask.setProject(pro);
+            tmpTask.setDescription(desc);
             
-            if(task.setStartTime(startTime) && task.setEndTime(endTime)) {
+            if(tmpTask.setStartTime(startTime) && tmpTask.setEndTime(endTime)) {
                 EditFiles.saveTasks(EditFiles.getFilePath(this.selectedDay), this.data);
                 this.loadTasks(this.selectedDay);
             }

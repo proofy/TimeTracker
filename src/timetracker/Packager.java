@@ -72,21 +72,19 @@ public class Packager {
                 if(!fileName.contains(".")) {
                     newFile.mkdir();
                 } else {
-                    FileOutputStream fos = new FileOutputStream(newFile);   
-
-                    int len;
-                    while ((len = zipInputStream.read(buffer)) > 0) {
-                        fos.write(buffer, 0, len);
+                    try (FileOutputStream fos = new FileOutputStream(newFile)) {
+                        int len;
+                        while ((len = zipInputStream.read(buffer)) > 0) {
+                            fos.write(buffer, 0, len);
+                        }
                     }
-
-                    fos.close();  
                 }
  
                 zipEntry = zipInputStream.getNextEntry();
             }
             
         } catch(IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 }
