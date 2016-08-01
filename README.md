@@ -14,15 +14,15 @@ is a software which protocols the working hours for an project. Just a few steps
 - [ ] option menu
 
 
-- [x] datepicker to switch between dates
-- [x] systemtray entry
-- [x] table of todays recordings
-- [x] input for projects with autocomplete
-- [x] input for a description
-- [x] button start/stop time capture
-- [x] start recording
-- [x] stop recording
-- [x] save day in file
-- [x] create directory hierarchie yyyy/mm/dd
-- [x] hide in systemtray
-- [x] import backup
+- [X] datepicker to switch between dates
+- [X] systemtray entry
+- [X] table of todays recordings
+- [X] input for projects with autocomplete
+- [X] input for a description
+- [X] button start/stop time capture
+- [X] start recording
+- [X] stop recording
+- [X] save day in file
+- [X] create directory hierarchie yyyy/mm/dd
+- [X] hide in systemtray
+- [X] import backup
