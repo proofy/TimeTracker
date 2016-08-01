@@ -25,10 +25,14 @@ package timetracker;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 /**
  * Collection of packaging functions.
@@ -42,7 +46,48 @@ public class Packager {
      * @param zipFile Target file
      */
     public static void zip(String targetPath, File zipFile) {
-        
+        FileOutputStream fos = null;
+        try {
+            byte[] buffer = new byte[1024];
+            fos = new FileOutputStream(zipFile);
+            ZipOutputStream zos = new ZipOutputStream(fos);
+            
+            List<String> targetFiles = Packager.generateFileList(new File(targetPath));
+            
+            targetFiles.forEach(fileName -> {
+                FileInputStream in = null;
+                try {
+                    int len;
+                    in = new FileInputStream(new File(fileName));
+                    
+                    while ((len = in.read(buffer)) > 0) {
+                        zos.write(buffer, 0, len);
+                    }
+                    
+                    in.close();
+                    
+                } catch (FileNotFoundException e) {
+                    System.err.println(e.getMessage());
+                } catch (IOException e) {
+                    System.err.println(e.getMessage());
+                } finally {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+            });
+            
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+        }
     }
     
     /**
@@ -86,5 +131,27 @@ public class Packager {
         } catch(IOException e) {
             System.err.println(e.getMessage());
         }
+    }
+    
+    public static List<String> generateFileList(File node) {
+        List<String> list = new ArrayList<>();
+        if(node.isFile()) {
+            list.add(node.getAbsolutePath() + File.separator + node.getName());
+        }
+        
+        if(node.isDirectory()) {
+            String[] subNodes = node.list();
+            List<String> tmpArraylist;
+            
+            for(String filename : subNodes) {
+                tmpArraylist = Packager.generateFileList(new File(filename));
+                
+                tmpArraylist.forEach(string -> {
+                    list.add(string);
+                });
+            }
+        }
+        
+        return list;
     }
 }

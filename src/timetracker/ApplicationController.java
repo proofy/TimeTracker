@@ -246,7 +246,7 @@ public class ApplicationController implements Initializable {
      */
     @FXML
     public void handleMenuItemExport(ActionEvent event) {
-        
+        Packager.zip("./files", new File("./zip.zip"));
     }
     
     /**
