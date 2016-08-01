@@ -7,13 +7,6 @@ is a software which protocols the working hours for an project. Just a few steps
 4. Press stop to end the recording and save the task
 
 ## TODOs
-
-- [ ] menubar
-- [ ] backup(create zip)
-- [ ] autostart on systemstart
-- [ ] option menu
-
-
 - [X] datepicker to switch between dates
 - [X] systemtray entry
 - [X] table of todays recordings
@@ -26,3 +19,7 @@ is a software which protocols the working hours for an project. Just a few steps
 - [X] create directory hierarchie yyyy/mm/dd
 - [X] hide in systemtray
 - [X] import backup
+- [ ] menubar
+- [ ] backup(create zip)
+- [ ] autostart on systemstart
+- [ ] option menu
