@@ -121,7 +121,12 @@ public final class EditFiles {
         Writer writer = null;
         
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "utf-8"));
+            File file = new File(path);
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+            
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
             for(int i=0; i < strings.size(); i++) {
                 writer.append(strings.get(i) + "\n");
             }
