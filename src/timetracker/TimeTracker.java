@@ -37,6 +37,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javax.swing.ImageIcon;
+import softwarebude.basis.SingleInstanceOfAppChecker;
 
 /**
  * Main class of the application TimeTracker.
@@ -60,8 +61,6 @@ public class TimeTracker extends Application {
         
         this.settings = new Settings();
         this.settings.loadSettings();
-        
-        stage.show();
         
         if (SystemTray.isSupported() && this.settings.getSettingBoolean("useSystemTray")) {  
             Platform.setImplicitExit(false);
@@ -102,14 +101,23 @@ public class TimeTracker extends Application {
             } catch (Exception e) {
                 System.err.println("Can't add to tray");
             }
-        } 
+        } else {
+            stage.setOnCloseRequest(e -> System.exit(0));
+        }
+        
+        stage.show();
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        if(!SingleInstanceOfAppChecker.isRunning()) {
+            launch(args);
+        } else {
+            System.err.println("Application already running!");
+            System.exit(0);
+        }
     }
     
     private static Image createImage(String path, String description) {
