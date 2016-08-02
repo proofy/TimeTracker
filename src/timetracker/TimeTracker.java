@@ -39,7 +39,7 @@ import javafx.stage.StageStyle;
 import javax.swing.ImageIcon;
 
 /**
- * 
+ * Main class of the application TimeTracker.
  * @author Matthias Fischer
  */
 public class TimeTracker extends Application {
