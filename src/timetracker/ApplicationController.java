@@ -284,7 +284,7 @@ public class ApplicationController implements Initializable {
     public void handleMenuItemAbout(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About TimeTracker");
-        alert.setHeaderText("TimeTracker v0.1");
+        alert.setHeaderText("TimeTracker 0.9");
         alert.setContentText("URL:\t\thttps://matze-fischer.de\nE-Mail:\tcontact@matze-fischer.de");
         alert.showAndWait();
     }

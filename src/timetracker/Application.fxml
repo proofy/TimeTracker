@@ -26,7 +26,7 @@
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#handleMenuItemImport" text="Import" />
                         <MenuItem mnemonicParsing="false" onAction="#handleMenuItemExport" text="Export" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleMenuItemSettings" text="Settings" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleMenuItemSettings" text="Settings" visible="false" />
                         <MenuItem mnemonicParsing="false" onAction="#handleMenuItemExit" text="Exit" />
                   </items>
                 </Menu>
@@ -77,19 +77,6 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField id="inpProject" fx:id="tfProject" prefHeight="25.0" prefWidth="395.0" promptText="Project" GridPane.columnIndex="1" />
-                        <TextField id="inpDescription" fx:id="tfDescription" prefHeight="25.0" prefWidth="345.0" promptText="Description" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <ButtonBar buttonMinWidth="50.0" prefHeight="40.0" GridPane.columnIndex="2">
-                           <buttons>
-                                <Button fx:id="btnStartStop" onAction="#handleButtonStartStopAction" prefHeight="25.0" text="Start" />
-                           </buttons>
-                        </ButtonBar>
-                        <ButtonBar buttonMinWidth="50.0" prefHeight="40.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                          <buttons>
-                              <Button fx:id="btnSave" mnemonicParsing="false" onAction="#handleButtonSave" prefHeight="25.0" text="Save" />
-                              <Button fx:id="btnDelete" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonDelete" prefHeight="25.0" text="Delete" />
-                          </buttons>
-                        </ButtonBar>
                         <TextField fx:id="tfStartTime" promptText="Start">
                            <GridPane.margin>
                               <Insets right="10.0" />
@@ -100,6 +87,19 @@
                               <Insets right="10.0" />
                            </GridPane.margin>
                         </TextField>
+                        <TextField id="inpProject" fx:id="tfProject" prefHeight="25.0" prefWidth="395.0" promptText="Project" GridPane.columnIndex="1" />
+                        <TextField id="inpDescription" fx:id="tfDescription" prefHeight="25.0" prefWidth="345.0" promptText="Description" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ButtonBar buttonMinWidth="50.0" prefHeight="40.0" GridPane.columnIndex="2">
+                           <buttons>
+                                <Button fx:id="btnStartStop" onAction="#handleButtonStartStopAction" prefHeight="25.0" prefWidth="112.0" text="Start" />
+                           </buttons>
+                        </ButtonBar>
+                        <ButtonBar buttonMinWidth="50.0" prefHeight="40.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                          <buttons>
+                              <Button fx:id="btnSave" mnemonicParsing="false" onAction="#handleButtonSave" prefHeight="25.0" text="Save" />
+                              <Button fx:id="btnDelete" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonDelete" prefHeight="25.0" text="Delete" />
+                          </buttons>
+                        </ButtonBar>
                      </children>
                   </GridPane>
                </children>
