@@ -60,7 +60,7 @@
                       <TableColumn fx:id="tcStartTime" editable="false" prefWidth="45.0" resizable="false" sortable="false" text="Start" />
                       <TableColumn fx:id="tcEndTime" editable="false" prefWidth="45.0" resizable="false" sortable="false" text="End" />
                         <TableColumn fx:id="tcProject" editable="false" prefWidth="120.0" resizable="false" sortable="false" text="Project" />
-                        <TableColumn fx:id="tcDescription" editable="false" prefWidth="270.0" resizable="false" sortable="false" text="Description" />
+                        <TableColumn fx:id="tcDescription" editable="false" prefWidth="268.0" resizable="false" sortable="false" text="Description" />
                     </columns>
                      <VBox.margin>
                         <Insets />
