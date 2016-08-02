@@ -141,7 +141,7 @@ public final class EditFiles {
      */
     public static String getFilename(Calendar date) {
         String year = Integer.toString(date.get(Calendar.YEAR));
-        String month = Task.correctLength(Integer.toString(date.get(Calendar.MONTH)));
+        String month = Task.correctLength(Integer.toString(date.get(Calendar.MONTH)+1));
         String day = Task.correctLength(Integer.toString(date.get(Calendar.DAY_OF_MONTH)));
         return year + "-" + month + "-" + day;
     }
@@ -153,7 +153,7 @@ public final class EditFiles {
      */
     public static String getDirectory(Calendar date) {
         String year = Integer.toString(date.get(Calendar.YEAR));
-        String month = Task.correctLength(Integer.toString(date.get(Calendar.MONTH)));
+        String month = Task.correctLength(Integer.toString(date.get(Calendar.MONTH)+1));
         
         return "./files/" + year + "/" + month + "/";
     }
