@@ -39,7 +39,7 @@ public class Settings {
     private final Map<String, Setting> list;
     
     Settings() {
-        EditFiles.createFile(this.path);
+        EditTaskFiles.createFile(this.path);
         this.list = new HashMap<>();
     }
     
@@ -47,7 +47,7 @@ public class Settings {
      * Load settings out of the settings.ini file
      */
     public void loadSettings() {
-        this.parseSettingFile(EditFiles.readFile(this.path));
+        this.parseSettingFile(EditTaskFiles.readFile(this.path));
     }
     
     /**
@@ -60,7 +60,7 @@ public class Settings {
             rows.add(entry.getValue().createFileString());
         });
         
-        EditFiles.saveFile(this.path, rows);
+        EditTaskFiles.saveFile(this.path, rows);
     }
     
     /**

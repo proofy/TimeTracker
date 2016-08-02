@@ -48,6 +48,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import org.controlsfx.control.textfield.TextFields;
+import softwarebude.basis.Packager;
 
 /**
  * Controller for the GUI. It handles the interaction with the dialog.
@@ -129,7 +130,7 @@ public class ApplicationController implements Initializable {
             this.task.stop();
             this.data.add(this.task);
             
-            EditFiles.saveTasks(EditFiles.getFilePath(this.selectedDay), this.data);
+            EditTaskFiles.saveTasks(EditTaskFiles.getFilePath(this.selectedDay), this.data);
             this.addProject(this.task);
             
             this.tfStartTime.setText("");
@@ -187,7 +188,7 @@ public class ApplicationController implements Initializable {
             tmpTask.setDescription(desc);
             
             if(tmpTask.setStartTime(startTime) && tmpTask.setEndTime(endTime)) {
-                EditFiles.saveTasks(EditFiles.getFilePath(this.selectedDay), this.data);
+                EditTaskFiles.saveTasks(EditTaskFiles.getFilePath(this.selectedDay), this.data);
                 this.loadTasks(this.selectedDay);
             }
         }
@@ -213,7 +214,7 @@ public class ApplicationController implements Initializable {
                 if (dialogButton == yesButton) {
                     this.data.remove(t);
 
-                    EditFiles.saveTasks(EditFiles.getFilePath(this.selectedDay), this.data);
+                    EditTaskFiles.saveTasks(EditTaskFiles.getFilePath(this.selectedDay), this.data);
                     this.loadTasks(this.selectedDay);
                 }
                 return null;
@@ -250,7 +251,7 @@ public class ApplicationController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TimeTracker", "*.tt"));
         fileChooser.setTitle("Export Backup");
-        fileChooser.setInitialFileName(EditFiles.getFilename(this.today) + "_backup");
+        fileChooser.setInitialFileName(EditTaskFiles.getFilename(this.today) + "_backup");
         
         File exportFile = fileChooser.showSaveDialog(root.getScene().getWindow());
         if(exportFile != null) {
@@ -320,8 +321,8 @@ public class ApplicationController implements Initializable {
      * Create directory structure.
      */
     private void initFilesystem() {
-        EditFiles.createFile(EditFiles.getDirectory(this.today), true);
-        EditFiles.createFile(this.pathProjects);
+        EditTaskFiles.createFile(EditTaskFiles.getDirectory(this.today), true);
+        EditTaskFiles.createFile(this.pathProjects);
     } 
     
     /**
@@ -331,7 +332,7 @@ public class ApplicationController implements Initializable {
     private void loadTasks(Calendar date) {
         this.data.clear();
         
-        List<String> lines = EditFiles.readFile(EditFiles.getFilePath(date));
+        List<String> lines = EditTaskFiles.readFile(EditTaskFiles.getFilePath(date));
         Task iss;
 
         for(int i=0;i<lines.size();i++) {
@@ -349,7 +350,7 @@ public class ApplicationController implements Initializable {
         
         if(!this.autoProjects.contains(pro)) {
             this.autoProjects.add(pro);
-            EditFiles.saveFile(this.pathProjects, this.autoProjects);
+            EditTaskFiles.saveFile(this.pathProjects, this.autoProjects);
         }
         
         TextFields.bindAutoCompletion(this.tfProject, this.autoProjects);
@@ -360,7 +361,7 @@ public class ApplicationController implements Initializable {
      */
     private void loadProjects() {
         this.autoProjects.clear();
-        List<String> lines = EditFiles.readFile(this.pathProjects);
+        List<String> lines = EditTaskFiles.readFile(this.pathProjects);
 
         for(int i=0;i<lines.size();i++) {
             this.autoProjects.add(lines.get(i));
