@@ -10,5 +10,4 @@ is a software which protocols the working hours for an project. Just a few steps
 Just start the installer for linux/windows or build the sourcecode by your own.
 
 ## TODO
-- [ ] option menu
 - [ ] autostart on systemstart

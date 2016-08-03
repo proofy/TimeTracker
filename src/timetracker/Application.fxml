@@ -26,7 +26,7 @@
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#handleMenuItemImport" text="Import" />
                         <MenuItem mnemonicParsing="false" onAction="#handleMenuItemExport" text="Export" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleMenuItemSettings" text="Settings" visible="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleMenuItemSettings" text="Settings" />
                         <MenuItem mnemonicParsing="false" onAction="#handleMenuItemExit" text="Exit" />
                   </items>
                 </Menu>

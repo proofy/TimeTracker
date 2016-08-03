@@ -45,8 +45,6 @@ import softwarebude.basis.SingleInstanceOfAppChecker;
  */
 public class TimeTracker extends Application {
     
-    public Settings settings;
-    
     @Override
     public void start(Stage stage) throws Exception {
         
@@ -59,10 +57,10 @@ public class TimeTracker extends Application {
         stage.initStyle(StageStyle.UTILITY);
         stage.getIcons().add(new javafx.scene.image.Image("/images/logo.png"));
         
-        this.settings = new Settings();
-        this.settings.loadSettings();
+        Settings settings = new Settings();
+        settings.loadSettings();
         
-        if (SystemTray.isSupported() && this.settings.getSettingBoolean("useSystemTray")) {  
+        if (SystemTray.isSupported() && settings.getSettingBoolean("useSystemTray")) {  
             Platform.setImplicitExit(false);
             SystemTray tray = SystemTray.getSystemTray();
 

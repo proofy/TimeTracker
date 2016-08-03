@@ -24,6 +24,7 @@
 package timetracker;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -34,7 +35,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -47,6 +51,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.controlsfx.control.textfield.TextFields;
 import softwarebude.basis.Packager;
 
@@ -265,7 +271,18 @@ public class ApplicationController implements Initializable {
      */
     @FXML
     public void handleMenuItemSettings(ActionEvent event) {
-        
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Settings.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Settings");
+            stage.setScene(new Scene(root, 250, 110));
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     /**
@@ -285,7 +302,7 @@ public class ApplicationController implements Initializable {
     public void handleMenuItemAbout(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About TimeTracker");
-        alert.setHeaderText("TimeTracker 0.9");
+        alert.setHeaderText("TimeTracker 1.0");
         alert.setContentText("URL:\t\thttps://matze-fischer.de\nE-Mail:\tcontact@matze-fischer.de");
         alert.showAndWait();
     }
