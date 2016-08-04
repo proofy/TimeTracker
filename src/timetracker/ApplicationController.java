@@ -183,6 +183,14 @@ public class ApplicationController implements Initializable {
     @FXML 
     public void handleDateChanged(ActionEvent event) {
         this.loadTasks(this.selectedDay);
+        int tod = this.today.get(Calendar.DATE);
+        int sel = this.selectedDay.get(Calendar.DATE);
+        
+        if(tod == sel) {
+            this.btnStartStop.setDisable(true);
+        } else {
+            this.btnStartStop.setDisable(false);
+        }
     }
     
     /**
