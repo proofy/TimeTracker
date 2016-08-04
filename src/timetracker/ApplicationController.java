@@ -77,11 +77,11 @@ public class ApplicationController implements Initializable {
     @FXML private AnchorPane root;
     @FXML private DatePicker dpDate;
     
-    @FXML private Button btnStartStop;
-    @FXML private TextField tfProject;
-    @FXML private TextField tfDescription;
     @FXML private TextField tfStartTime;
     @FXML private TextField tfEndTime;
+    @FXML private TextField tfProject;
+    @FXML private TextField tfDescription;
+    @FXML private Button btnStartStop;
     
     @FXML private TableColumn tcStartTime;
     @FXML private TableColumn tcEndTime;
@@ -305,6 +305,23 @@ public class ApplicationController implements Initializable {
         alert.setHeaderText("TimeTracker 1.0");
         alert.setContentText("URL:\t\thttps://matze-fischer.de\nE-Mail:\tcontact@matze-fischer.de");
         alert.showAndWait();
+    }
+    
+    /**
+     * Handler for enter-pressed. It changes the focus to the next textfield.
+     * @param event Actionevent
+     */
+    @FXML
+    public void handleEnter(ActionEvent event) {
+        if(event.getSource().equals(this.tfStartTime)) {
+            this.tfEndTime.requestFocus();
+        } else if(event.getSource().equals(this.tfEndTime)) {
+            this.tfProject.requestFocus();
+        } else if(event.getSource().equals(this.tfProject)) {
+            this.tfDescription.requestFocus();
+        } else if(event.getSource().equals(this.tfDescription)) {
+            // do nothing
+        }
     }
     
     /**
