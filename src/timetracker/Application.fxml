@@ -77,18 +77,18 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="tfStartTime" promptText="Start">
+                        <TextField fx:id="tfStartTime" onAction="#handleEnter" promptText="Start">
                            <GridPane.margin>
                               <Insets right="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="tfEndTime" promptText="End" GridPane.rowIndex="1">
+                        <TextField fx:id="tfEndTime" onAction="#handleEnter" promptText="End" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField id="inpProject" fx:id="tfProject" prefHeight="25.0" prefWidth="395.0" promptText="Project" GridPane.columnIndex="1" />
-                        <TextField id="inpDescription" fx:id="tfDescription" prefHeight="25.0" prefWidth="345.0" promptText="Description" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField id="inpProject" fx:id="tfProject" onAction="#handleEnter" prefHeight="25.0" prefWidth="395.0" promptText="Project" GridPane.columnIndex="1" />
+                        <TextField id="inpDescription" fx:id="tfDescription" onAction="#handleEnter" prefHeight="25.0" prefWidth="345.0" promptText="Description" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <ButtonBar buttonMinWidth="50.0" prefHeight="40.0" GridPane.columnIndex="2">
                            <buttons>
                                 <Button fx:id="btnStartStop" onAction="#handleButtonStartStopAction" prefHeight="25.0" prefWidth="112.0" text="Start" />
