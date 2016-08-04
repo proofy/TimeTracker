@@ -49,6 +49,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -82,6 +83,7 @@ public class ApplicationController implements Initializable {
     @FXML private TextField tfProject;
     @FXML private TextField tfDescription;
     @FXML private Button btnStartStop;
+    @FXML private Button btnSave;
     
     @FXML private TableColumn tcStartTime;
     @FXML private TableColumn tcEndTime;
@@ -102,7 +104,12 @@ public class ApplicationController implements Initializable {
         
         this.data = FXCollections.observableArrayList();
         this.autoProjects = FXCollections.observableArrayList();
-        TextFields.bindAutoCompletion(this.tfProject, this.autoProjects);       
+        TextFields.bindAutoCompletion(this.tfProject, this.autoProjects);   
+        
+        this.tfStartTime.textProperty().addListener((observable, oldValue, newValue) -> { this.checkSaveAllowed(); });
+        this.tfEndTime.textProperty().addListener((observable, oldValue, newValue) -> { this.checkSaveAllowed(); });
+        this.tfProject.textProperty().addListener((observable, oldValue, newValue) -> { this.checkSaveAllowed(); });
+        this.tfDescription.textProperty().addListener((observable, oldValue, newValue) -> { this.checkSaveAllowed(); });
         
         this.initFilesystem();
         this.settings = new Settings();
@@ -321,6 +328,24 @@ public class ApplicationController implements Initializable {
             this.tfDescription.requestFocus();
         } else if(event.getSource().equals(this.tfDescription)) {
             // do nothing
+        }
+    }
+    
+    /**
+     * Check if the textfields are filled - if so the save function will be enabled
+     * @param event KeyEvent
+     */
+    @FXML
+    public void checkSaveAllowed() {
+        String pro = this.tfProject.getText();
+        String desc = this.tfDescription.getText();
+        String startTime = this.tfStartTime.getText();
+        String endTime = this.tfEndTime.getText();
+        
+        if(!pro.equals("") && !desc.equals("") && !startTime.equals("") && !endTime.equals("")) {
+            this.btnSave.setDisable(false);
+        } else {
+            this.btnSave.setDisable(true);
         }
     }
     

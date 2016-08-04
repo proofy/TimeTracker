@@ -96,8 +96,8 @@
                         </ButtonBar>
                         <ButtonBar buttonMinWidth="50.0" prefHeight="40.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                           <buttons>
-                              <Button fx:id="btnSave" mnemonicParsing="false" onAction="#handleButtonSave" prefHeight="25.0" text="Save" />
-                              <Button fx:id="btnDelete" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonDelete" prefHeight="25.0" text="Delete" />
+                              <Button fx:id="btnSave" disable="true" mnemonicParsing="false" onAction="#handleButtonSave" prefHeight="25.0" text="Save" />
+                              <Button fx:id="btnDelete" disable="true" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonDelete" prefHeight="25.0" text="Delete" />
                           </buttons>
                         </ButtonBar>
                      </children>
