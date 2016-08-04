@@ -66,7 +66,7 @@ public class Task {
      */
     public void start() {
         this.dateStart = Calendar.getInstance(Locale.GERMANY);
-        this.start = new SimpleStringProperty(this.timeToString(dateStart));
+        this.start = new SimpleStringProperty(this.timeToString(this.dateStart));
         this.started = true;
     }
     
@@ -75,7 +75,7 @@ public class Task {
      */
     public void stop() {
         this.dateEnd = Calendar.getInstance(Locale.GERMANY);
-        this.end = new SimpleStringProperty(this.timeToString(dateEnd));
+        this.end = new SimpleStringProperty(this.timeToString(this.dateEnd));
         this.started = false;
     }
     
@@ -141,6 +141,7 @@ public class Task {
         if(hours >= 0 && hours < 25 && minutes >= 0 && minutes < 60) {
             this.dateStart.set(Calendar.HOUR_OF_DAY, hours);
             this.dateStart.set(Calendar.MINUTE, minutes);
+            this.start = new SimpleStringProperty(this.timeToString(this.dateStart));
             return true;
         }
         return false;
@@ -168,6 +169,7 @@ public class Task {
         if(hours >= 0 && hours < 25 && minutes >= 0 && minutes < 60) {
             this.dateEnd.set(Calendar.HOUR_OF_DAY, hours);
             this.dateEnd.set(Calendar.MINUTE, minutes);
+            this.end = new SimpleStringProperty(this.timeToString(this.dateEnd));
             return true;
         }
         return false;
@@ -179,6 +181,24 @@ public class Task {
      */
     public String getEndTime() {
         return (this.dateEnd != null) ? this.timeToString(dateEnd) : "";
+    }
+    
+    /**
+     * Set the startdate
+     * @param date Calendar date
+     */
+    public void setDateStart(Calendar date) {
+        this.dateStart = date;
+        this.start = new SimpleStringProperty(this.timeToString(this.dateStart));
+    }
+    
+    /**
+     * Set the end date
+     * @param date Calendar date
+     */
+    public void setDateEnd(Calendar date) {
+        this.dateEnd = date;
+        this.end = new SimpleStringProperty(this.timeToString(this.dateEnd));
     }
     
     /**

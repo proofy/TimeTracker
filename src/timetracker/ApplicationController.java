@@ -49,7 +49,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -193,21 +192,39 @@ public class ApplicationController implements Initializable {
     @FXML
     public void handleButtonSave(ActionEvent event) {
         Task tmpTask = (Task)this.tvTasks.getSelectionModel().getSelectedItem();
+        
         String pro = this.tfProject.getText();
         String desc = this.tfDescription.getText();
         String startTime = this.tfStartTime.getText();
         String endTime = this.tfEndTime.getText();
         
-        if(tmpTask != null && !pro.equals("") && !desc.equals("") && !startTime.equals("") && !endTime.equals("")) {
-            tmpTask.setProject(pro);
-            tmpTask.setDescription(desc);
+        if(!pro.equals("") && !desc.equals("") && !startTime.equals("") && !endTime.equals("")) {
+            if(tmpTask != null) {
+                tmpTask.setProject(pro);
+                tmpTask.setDescription(desc);
             
-            if(tmpTask.setStartTime(startTime) && tmpTask.setEndTime(endTime)) {
-                EditTaskFiles.saveTasks(EditTaskFiles.getFilePath(this.selectedDay), this.data);
-                this.loadTasks(this.selectedDay);
+                if(tmpTask.setStartTime(startTime) && tmpTask.setEndTime(endTime)) {
+                    EditTaskFiles.saveTasks(EditTaskFiles.getFilePath(this.selectedDay), this.data);
+                    this.loadTasks(this.selectedDay);
+                }
+            } else { // new Task
+                tmpTask = new Task(pro, desc);
+                tmpTask.setDateStart(this.selectedDay);
+                tmpTask.setDateEnd(this.selectedDay);
+                
+                if(tmpTask.setStartTime(startTime) && tmpTask.setEndTime(endTime)) {
+                    this.data.add(tmpTask);
+            
+                    EditTaskFiles.saveTasks(EditTaskFiles.getFilePath(this.selectedDay), this.data);
+                    this.addProject(tmpTask);
+
+                    this.tfStartTime.setText("");
+                    this.tfEndTime.setText("");
+                }
             }
         }
     }
+    
     /**
      * Handler for the button delete task. It deletes the selected task.
      * @param event ActionEvent
