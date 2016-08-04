@@ -83,7 +83,9 @@ public class ApplicationController implements Initializable {
     @FXML private TextField tfProject;
     @FXML private TextField tfDescription;
     @FXML private Button btnStartStop;
+    
     @FXML private Button btnSave;
+    @FXML private Button btnDelete;
     
     @FXML private TableColumn tcStartTime;
     @FXML private TableColumn tcEndTime;
@@ -333,7 +335,6 @@ public class ApplicationController implements Initializable {
     
     /**
      * Check if the textfields are filled - if so the save function will be enabled
-     * @param event KeyEvent
      */
     @FXML
     public void checkSaveAllowed() {
@@ -366,12 +367,14 @@ public class ApplicationController implements Initializable {
                 tfDescription.setText(((Task)newSelection).getDescription());
                 tfStartTime.setText(((Task)newSelection).getStartTime());
                 tfEndTime.setText(((Task)newSelection).getEndTime());
+                btnDelete.setDisable(false);
                 
             } else {
                 tfProject.setText("");
                 tfDescription.setText("");
                 tfStartTime.setText("");
                 tfEndTime.setText("");
+                btnDelete.setDisable(true);
             }
         });  
     }
