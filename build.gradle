@@ -27,8 +27,7 @@ repositories {
 }
 
 dependencies {
-	compile name: 'controlsfx-8.40.11'
-	compile name: 'Softwarebude-Java-Lib'
+	compile fileTree(dir: 'libs', include: '*.jar')
 }
 
 apply plugin: 'javafx-gradle-plugin'
