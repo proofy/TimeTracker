@@ -1,7 +1,7 @@
 buildscript {
     dependencies {
         classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.5.2'
-        compile filetree('libs', include: ['*.jar'])
+        compile fileTree('libs', include: ['*.jar'])
     }
     repositories {
         mavenLocal()
@@ -25,7 +25,6 @@ repositories {
 }
 
 apply plugin: 'javafx-gradle-plugin'
-
 
 jfx {
     mainClass = 'net.softwarebude.timetracker.TimeTracker'
