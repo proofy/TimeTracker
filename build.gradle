@@ -25,6 +25,12 @@ dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class' : 'net.softwarebude.timetracker.TimeTracker'
+    }
+}
+
 apply plugin: 'javafx-gradle-plugin'
 
 jfx {
