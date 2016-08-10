@@ -8,4 +8,4 @@ is a software which protocols the working hours for an project. Just a few steps
 4. Press stop to end the recording and save the task
 
 ## Build instruction
-Just use gradle to build this project. Excecute the command 'gradle jfxJar' to create the application.
+Just use gradle to build this project. Excecute the command `gradle jfxJar` to create the application.
