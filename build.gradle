@@ -1,7 +1,6 @@
 buildscript {
     dependencies {
         classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.5.2'
-        compile fileTree('libs', include: ['*.jar'])
     }
     repositories {
         mavenLocal()
@@ -22,6 +21,10 @@ sourceSets {
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+	compile fileTree('libs', include: ['*.jar'])
 }
 
 apply plugin: 'javafx-gradle-plugin'
