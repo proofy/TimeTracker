@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" maxHeight="540.0" maxWidth="500.0" minHeight="540.0" minWidth="500.0" prefHeight="540.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timetracker.ApplicationController">
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="540.0" maxWidth="500.0" minHeight="540.0" minWidth="500.0" prefHeight="540.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.softwarebude.timetracker.ApplicationController">
     <children>
       <VBox>
          <children>
