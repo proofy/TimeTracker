@@ -3,9 +3,7 @@ buildscript {
         classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.5.2'
     }
     repositories {
-        mavenLocal()
         mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 }
 
@@ -24,8 +22,7 @@ repositories {
 }
 
 dependencies {
-	runtime files('./libs/controlsfx-8.40.11.jar')
-	runtime files('./libs/Softwarebude-Java-Lib.jar')
+    compile fileTree(dir: 'libs', include: '*.jar')
 }
 
 apply plugin: 'javafx-gradle-plugin'

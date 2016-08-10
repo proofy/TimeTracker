@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package timetracker;
+package net.softwarebude.timetracker;
 
 /**
  * Simple setting of the file settings.ini
