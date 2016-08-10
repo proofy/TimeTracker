@@ -21,10 +21,14 @@ sourceSets {
 
 repositories {
     mavenCentral()
+	flatDir {
+		dirs 'libs'
+	}
 }
 
 dependencies {
-	compile fileTree('libs', include: ['*.jar'])
+	compile name: 'controlsfx-8.40.11'
+	compile name: 'Softwarebude-Java-Lib'
 }
 
 apply plugin: 'javafx-gradle-plugin'
