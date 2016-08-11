@@ -9,6 +9,10 @@ buildscript {
 
 apply plugin: 'java'
 
+group = theGroup
+version = theVersion
+sourceCompatibility = theSourceCompatibility
+
 repositories {
     mavenCentral()
     flatDir {
@@ -29,8 +33,8 @@ jar {
 sourceSets {
   main {
     resources {
-        srcDirs = ["src/main/java"]
-        includes = ["**/*.fxml", "**/*.png"]
+        srcDirs = ['src/main/java']
+        includes = ['**/*.fxml', '**/*.png']
     }
   }
 }
@@ -39,6 +43,6 @@ apply plugin: 'javafx-gradle-plugin'
 
 jfx {
     mainClass = 'net.softwarebude.timetracker.TimeTracker'
-    vendor = 'Matthias Fischer'
-    jfxMainAppJarName = "TimeTracker.jar"
+    vendor = theGroup
+    jfxMainAppJarName = 'TimeTracker.jar'
 }
