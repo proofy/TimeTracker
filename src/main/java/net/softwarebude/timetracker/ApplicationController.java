@@ -54,7 +54,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.controlsfx.control.textfield.TextFields;
-import net.softwarebude.basis.Packager;
+import net.softwarebude.io.Packager;
 
 /**
  * Controller for the GUI. It handles the interaction with the dialog.

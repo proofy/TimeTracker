@@ -26,7 +26,7 @@ package net.softwarebude.timetracker;
 import java.util.Calendar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import net.softwarebude.basis.EditFiles;
+import net.softwarebude.io.EditFiles;
 
 /**
  * Functioncollection to edit Task-files.

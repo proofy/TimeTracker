@@ -7,5 +7,8 @@ is a software which protocols the working hours for an project. Just a few steps
 3. Press start to start the recording
 4. Press stop to end the recording and save the task
 
+## Requirements
+* jdk 8
+* gradle 3.0
 ## Build instruction
 Just use gradle to build this project. Excecute the command `gradle jfxJar` to create the application.

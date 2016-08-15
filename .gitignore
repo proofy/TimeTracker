@@ -16,3 +16,4 @@ hs_err_pid*
 
 /settings.ini
 /.nb-gradle/
+.gradle

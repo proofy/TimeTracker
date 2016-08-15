@@ -37,7 +37,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javax.swing.ImageIcon;
-import net.softwarebude.basis.SingleInstanceOfAppChecker;
+import net.softwarebude.app.SingleInstanceOfAppChecker;
 
 /**
  * Main class of the application TimeTracker.
